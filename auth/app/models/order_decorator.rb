@@ -10,6 +10,6 @@ Order.class_eval do
     save(:validate => false)
   end
 
-  validates_format_of :email, :with => Authlogic::Regex.email, :if => :require_email
+  #validates_format_of :email, :with => Authlogic::Regex.email, :if => :require_email
 
 end

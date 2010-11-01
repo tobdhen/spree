@@ -4,7 +4,7 @@ class StateMonitor < ActiveRecord::Observer
   # Generic transition callback *after* the transition is performed
   def after_transition(object, transition)
 
-    current_user_session = UserSession.activated? ? UserSession.find : nil
+    current_user_session = Session.activated? ? Session.find : nil
 
     if current_user_session
       author = current_user_session.user

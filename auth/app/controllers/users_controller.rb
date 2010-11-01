@@ -47,7 +47,7 @@ class UsersController < Spree::BaseController
   def create_session
     session_params = params[:user]
     session_params[:login] = session_params[:email]
-    UserSession.create session_params
+    warden.session(resource_name) << session_params
   end
 
 end
