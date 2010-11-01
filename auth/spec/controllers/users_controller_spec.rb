@@ -35,7 +35,7 @@ describe UsersController do
     end
 
     it "should create a user session after update" do
-      UserSession.should_receive :create
+      Session.should_receive :create
       put :update, {:user => {:password => "newpw", :password_confirmation => "newpw", :email => user.email}}
     end
   end

@@ -5,9 +5,8 @@ module ResourceController
     module Internal
       protected
       # Calls the before block for the action, if one is present.
-      #
       def before(action)
-        authorize! action, object || model
+        authorize!(action, object || model)
         invoke_callbacks *self.class.send(action).before
       end
     end

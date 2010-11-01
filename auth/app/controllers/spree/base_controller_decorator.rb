@@ -4,7 +4,11 @@ Spree::BaseController.class_eval do
   include Spree::AuthUser
 
   # graceful error handling for cancan authorization exceptions
-  rescue_from CanCan::AccessDenied, :with => :unauthorized
+  #rescue_from CanCan::AccessDenied, :with => :unauthorized
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to root_url
+  end
 
   private
   # authorize the user as a guest if the have a valid token
@@ -14,15 +18,15 @@ Spree::BaseController.class_eval do
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
+    @current_user_session = user_session
   end
 
-  def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = current_user_session && current_user_session.user
-  end
+  #def current_user
+  #  return @current_user if defined?(@current_user)
+  #  @current_user = current_user_session && current_user_session.user
+  #end
 
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session
 
 
 
@@ -49,7 +53,7 @@ Spree::BaseController.class_eval do
 
   def store_location
     # disallow return to login, logout, signup pages
-    disallowed_urls = [signup_url, login_url, logout_url]
+    disallowed_urls = [signup_url, login_url, destroy_user_session_path]
     disallowed_urls.map!{|url| url[/\/\w+$/]}
     unless disallowed_urls.include?(request.fullpath)
       session[:return_to] = request.fullpath

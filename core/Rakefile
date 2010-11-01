@@ -38,6 +38,7 @@ task :test_app do
     def tweak_gemfile
       append_file 'Gemfile' do
         "gem 'spree_core', :path => '#{File.dirname(__FILE__)}'"
+        "gem 'devise', '>= 1.1.3'"
       end
     end
 
