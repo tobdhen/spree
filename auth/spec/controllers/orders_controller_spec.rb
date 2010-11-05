@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe OrdersController do
-
+  #let(:user) { mock(Warden, :authenticate => mock_user, :authenticate! => mock_user) }
   let(:user) { mock_model User, :persistence_token => "foo", :has_role? => false, :email => "user@example.com" }
   let(:guest_user) { mock_model User, :persistence_token => "guest_token", :has_role? => false, :email => "user@example.com" }
 

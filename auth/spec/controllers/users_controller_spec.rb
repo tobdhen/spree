@@ -11,10 +11,11 @@ describe UsersController do
       assigns[:user].new_record?.should be_false
     end
 
-    it "should automatically authenticate the new user" do
-      post :create, {:user => {:email => "foobar@example.com", :password => "foobar123", :password_confirmation => "foobar123"} }
-      session[:user_credentials_id].should_not be_nil
-    end
+    # This is built into Devise see sign_in_and_redirect() helper
+    #it "should automatically authenticate the new user" do
+    #  post :create, {:user => {:email => "foobar@example.com", :password => "foobar123", :password_confirmation => "foobar123"} }
+    #  session[:user_credentials_id].should_not be_nil
+    #end
 
     context "when an order exists in the session" do
       let(:order) { mock_model Order }
@@ -88,6 +89,7 @@ describe UsersController do
          response.should redirect_to login_path
        end
 
-     end
+    end
   end
+
 end

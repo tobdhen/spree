@@ -6,8 +6,10 @@ Spree::BaseController.class_eval do
   # graceful error handling for cancan authorization exceptions
   #rescue_from CanCan::AccessDenied, :with => :unauthorized
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = exception.message
-    redirect_to root_url
+    flash.now[:error] = exception.message
+    render 'shared/unauthorized', :layout => 'spree_application'
+    #I Like the below with the unaurthorize message better for usability and general functionallity
+    #redirect_to root_url
   end
 
   private
