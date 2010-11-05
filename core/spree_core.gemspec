@@ -33,5 +33,4 @@ Gem::Specification.new do |s|
   s.add_dependency('will_paginate', '>= 3.0.pre')
   s.add_dependency('rails', '>= 3.0.1')
   s.add_dependency('jquery-rails', '>= 0.2.2')
-  s.add_dependency('devise', '>= 1.1.3')
 end
