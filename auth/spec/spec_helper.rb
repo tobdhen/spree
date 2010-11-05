@@ -26,6 +26,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
   
-  #devise stuff
+  # devise stuff CanCan#authenticate fails without this
   config.include Devise::TestHelpers, :type => :controller
 end
