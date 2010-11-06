@@ -4,12 +4,14 @@ Spree::BaseController.class_eval do
   include Spree::AuthUser
 
   # graceful error handling for cancan authorization exceptions
-  #rescue_from CanCan::AccessDenied, :with => :unauthorized
   rescue_from CanCan::AccessDenied do |exception|
-    flash.now[:error] = exception.message
-    render 'shared/unauthorized', :layout => 'spree_application'
-    #I Like the below with the unaurthorize message better for usability and general functionallity
-    #redirect_to root_url
+    if current_user
+      flash.now[:error] = I18n.t(:authorization_failure)
+      render 'shared/unauthorized', :layout => 'spree_application'
+    else
+      store_location
+      redirect_to login_path and return
+    end
   end
 
   private
