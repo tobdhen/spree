@@ -10,14 +10,12 @@ class RenameColumnsForDevise < ActiveRecord::Migration
     rename_column :users, :last_login_at, :last_sign_in_at
     rename_column :users, :current_login_ip, :current_sign_in_ip
     rename_column :users, :last_login_ip, :last_sign_in_ip
-    remove_column :users, :api_key
     add_column :users, :authentication_token, :string
     add_column :users, :unlock_token, :string
     add_column :users, :locked_at, :datetime
   end
 
   def self.down
-    add_column :users, :api_key, :string
     remove_column :users, :authentication_token
     remove_column :users, :locked_at
     remove_column :users, :unlock_token
