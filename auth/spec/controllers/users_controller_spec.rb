@@ -2,13 +2,15 @@ require 'spec_helper'
 
 describe UsersController do
 
+  before { controller.stub :current_user => nil }
+
   context "#create" do
 
     it "should create a new user" do
       post :create, {:user => {:email => "foobar@example.com", :password => "foobar123", :password_confirmation => "foobar123"} }
       assigns[:user].new_record?.should be_false
     end
-    
+
     # This is built into Devise see sign_in_and_redirect() helper
     #it "should automatically authenticate the new user" do
     #  post :create, {:user => {:email => "foobar@example.com", :password => "foobar123", :password_confirmation => "foobar123"} }
