@@ -5,11 +5,6 @@ describe User do
 
   context "#create" do
     let(:user) { User.new(:email => "foo@bar.com", :password => "secret", :password_confirmation => "secret") }
-    # This comes from User.anonymous! and not User#create
-    it "should create a token when saving" do
-      user.save!
-      user.persistence_token.should_not be_nil
-    end
 
     before do
       User.delete_all
