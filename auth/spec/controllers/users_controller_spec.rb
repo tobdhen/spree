@@ -3,6 +3,7 @@ require 'spec_helper'
 describe UsersController do
 
   let(:user) { mock_model(User, :email => "spree@example.com", :has_role? => false) }
+  before { controller.stub :current_user => nil }
 
   context "#create" do
 
